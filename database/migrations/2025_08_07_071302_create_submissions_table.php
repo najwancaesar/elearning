@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->id('submission_id');
-            $table->timestamps('assisgnment_id')->constrained()->onDelete('cascade');
-            $table->text('instructi');
+            $table->foreignId('assisgnment_id')->constrained()->onDelete('cascade');
+            $table->foreignId('id_user')->constrained()->onDelete('cascade');
+            $table->varchar('file_url');
+            $table->timestamp('submitted_at');
+            $table->float('garde');
+            $table->text('feddback');
         });
     }
 
