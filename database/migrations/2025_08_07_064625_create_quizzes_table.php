@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quizzes', function (Blueprint $table) {
-            $table->id('id_quiz');
+            $table->id(); // ID auto increment
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->varchar('title');
-            $table->enum('type');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->string('title');
+            $table->enum('type', ['pretest', 'posttest', 'mid', 'final']);
+            $table->timestamp('start_time')->nullable(); // ✅ Perbaikan: bisa null
+            $table->timestamp('end_time')->nullable();   // ✅ Perbaikan: bisa null
         });
     }
 

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quiz_questions', function (Blueprint $table) {
-            $table->id('id_question');
+            $table->id(); // Lebih baik pakai default "id" saja
             $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
-            $table->text('question_text');
-            $table->varchar('type');
-            $table->text('option');
-            $table->text('correct_answer');
+            $table->text('question_text'); // Soal
+            $table->string('type'); // Misalnya: multiple_choice, true_false
+            $table->json('option')->nullable(); // ✅ Simpan pilihan dalam bentuk JSON
+            $table->string('correct_answer'); // Jawaban benar
         });
     }
 

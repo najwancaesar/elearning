@@ -6,25 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->id('submission_id');
-            $table->foreignId('assisgnment_id')->constrained()->onDelete('cascade');
-            $table->foreignId('id_user')->constrained()->onDelete('cascade');
-            $table->varchar('file_url');
-            $table->timestamp('submitted_at');
-            $table->float('garde');
-            $table->text('feddback');
+
+            // Kolom assignment_id, foreign key ke id_assignment
+            $table->unsignedBigInteger('assignment_id');
+            $table->foreign('assignment_id')->references('id_assignment')->on('assignments')->onDelete('cascade');
+
+            // Kolom user_id, foreign key ke users(id)
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+
+            $table->string('file_url');
+            $table->timestamp('submitted_at')->nullable();
+            $table->float('grade')->nullable();
+            $table->text('feedback')->nullable();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('submissions');
