@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id('id_courses');
-            $table->varchar('title');
+            $table->id(); // gunakan default id (bukan id_courses)
+            $table->string('title');
             $table->text('description');
-            $table->varchar('duration');
-            $table->varchar('category');
+            $table->string('duration');
+            $table->string('category');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->varchar('access_level');
-            $table->timestamp('created_at');
+            $table->string('access_level');
+            $table->timestamp('created_at')->useCurrent(); // default waktu saat insert
         });
     }
 
