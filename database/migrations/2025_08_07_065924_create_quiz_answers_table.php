@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('quiz_answers', function (Blueprint $table) {
             $table->id('id_answer');
-            $table->foreignId('id_question')->constrained()->onDelete('cascade');
-            $table->userId('id_user')->constrained()->onDelete('cascade');
+            $table->foreignId('id_question')->constrained('quiz_questions')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Perbaikan di sini
             $table->text('answer');
             $table->boolean('is_correct');
-            $table->timestamp('submitted_at');
+            $table->timestamp('submitted_at')->useCurrent();
         });
     }
 

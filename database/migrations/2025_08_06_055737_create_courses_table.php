@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id('id_courses');
-            $table->text('title');
+            $table->id(); // ✅ Gunakan default ID (bigint unsigned auto_increment)
+            $table->string('title');
             $table->text('description');
-            $table->integer('duration');
-            $table->text('category');
+            $table->string('duration');
+            $table->string('category');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->text('access_level');
-            $table->timestamp('created_at');
+            $table->string('access_level');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

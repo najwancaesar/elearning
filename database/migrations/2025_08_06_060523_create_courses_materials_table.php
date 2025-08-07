@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses_materials', function (Blueprint $table) {
-            $table->id('id_material');
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->varchar('title');
-            $table->varchar('type');
-            $table->varchar('file_url');
-            $table->timestamp('uploaded_at');
+            $table->id(); // gunakan default id
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->string('title');
+            $table->string('type');
+            $table->string('file_url');
+            $table->timestamp('uploaded_at')->useCurrent();
         });
     }
 
