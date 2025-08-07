@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id('id_courses');
-            $table->varchar('title');
+            $table->text('title');
             $table->text('description');
-            $table->varchar('duration');
-            $table->varchar('category');
+            $table->integer('duration');
+            $table->text('category');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->varchar('access_level');
+            $table->text('access_level');
             $table->timestamp('created_at');
         });
     }
