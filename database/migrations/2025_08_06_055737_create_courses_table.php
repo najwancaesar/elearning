@@ -17,7 +17,13 @@ return new class extends Migration
             $table->text('description');
             $table->string('duration');
             $table->string('category');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->integer('sid')->unsigned();
+            $table->integer('lid')->unsigned();
+
+
+            $table->foreign('sid')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('lid')->references('id')->on('users')->onDelete('cascade');
+
             $table->string('access_level');
             $table->timestamp('created_at')->useCurrent();
         });
