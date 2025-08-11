@@ -14,21 +14,17 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRoles;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
+     * Kolom yang bisa diisi mass assignment.
      */
     protected $fillable = [
         'name',
         'email',
         'password',
-        'nim',
+        'nim', // atau sid/lid tergantung kebutuhan
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
+     * Kolom yang disembunyikan saat serialisasi.
      */
     protected $hidden = [
         'password',
@@ -36,9 +32,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Casting atribut ke tipe tertentu.
      */
     protected function casts(): array
     {
@@ -46,5 +40,74 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Relasi ke Course (sebagai sid atau lid).
+     */
+    public function coursesAsSid()
+    {
+        return $this->hasMany(Course::class, 'sid');
+    }
+
+    public function coursesAsLid()
+    {
+        return $this->hasMany(Course::class, 'lid');
+    }
+
+    /**
+     * Relasi ke ActivityLog.
+     */
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class, 'user_id');
+    }
+
+    /**
+     * Relasi ke Notification.
+     */
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'user_id');
+    }
+
+    /**
+     * Relasi ke QuizAnswer.
+     */
+    public function quizAnswers()
+    {
+        return $this->hasMany(QuizAnswer::class, 'user_id');
+    }
+
+    /**
+     * Relasi ke ForumComment.
+     */
+    public function forumComments()
+    {
+        return $this->hasMany(ForumComment::class, 'user_id');
+    }
+
+    /**
+     * Relasi ke Forum.
+     */
+    public function forums()
+    {
+        return $this->hasMany(Forum::class, 'user_id');
+    }
+
+    /**
+     * Relasi ke LearningProgress.
+     */
+    public function learningProgress()
+    {
+        return $this->hasMany(LearningProgress::class, 'id_user');
+    }
+
+    /**
+     * Relasi ke Submission.
+     */
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class, 'user_id');
     }
 }

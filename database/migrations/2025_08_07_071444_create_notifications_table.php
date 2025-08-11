@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('id_notification'); // Primary Key
+            $table->unsignedBigInteger('id_user'); // FK ke users
+            $table->string('title', 150); // Judul
+            $table->text('message'); // Isi notifikasi
+            $table->boolean('is_read')->default(false); // Sudah dibaca atau belum
+            $table->timestamp('sent_at')->useCurrent(); // Waktu dikirim
+
+            // Foreign key constraint
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
