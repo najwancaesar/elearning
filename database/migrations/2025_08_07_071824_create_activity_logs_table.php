@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activity_logs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('id_log'); // Primary key
+            $table->unsignedBigInteger('id_user'); // FK ke users
+            $table->text('activity'); // Deskripsi aktivitas
+            $table->timestamp('timestamp')->useCurrent(); // Waktu aktivitas
+
+            // Foreign key constraint
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
