@@ -13,18 +13,21 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id(); // ✅ Gunakan default ID (bigint unsigned auto_increment)
+
             $table->string('title');
             $table->text('description');
             $table->string('duration');
+
             $table->string('category');
-            $table->integer('sid')->unsigned();
+
+            $table->string('access_level');
+
             $table->integer('lid')->unsigned();
 
-
+            $table->integer('sid')->unsigned();
             $table->foreign('sid')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('lid')->references('id')->on('users')->onDelete('cascade');
 
-            $table->string('access_level');
             $table->timestamp('created_at')->useCurrent();
         });
     }
