@@ -12,8 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('forum_comments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id_comment'); // Primary key
+            $table->unsignedBigInteger('id_forum'); // Foreign Key ke forums
+            $table->unsignedBigInteger('id_user');  // Foreign Key ke users
+            $table->text('comment'); // Isi komentar
+            $table->timestamp('created_at')->useCurrent(); // Hanya created_at
+
+            // Index
+            $table->index('id_forum');
+            $table->index('id_user');
+
+            // Foreign key constraints
+            $table->foreign('id_forum')
+                  ->references('id_forum')->on('forums')
+                  ->onDelete('cascade');
+
+            $table->foreign('id_user')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
         });
     }
 

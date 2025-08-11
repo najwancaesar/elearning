@@ -4,7 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class integrations extends Model
+class Integration extends Model
 {
-    //
+    protected $table = 'integrations';
+
+    protected $fillable = [
+        'type',
+        'external_url',
+        'description'
+    ];
 }

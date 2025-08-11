@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('forums', function (Blueprint $table) {
-            $table->id('id_forum'); // Primary key forums
+            $table->bigIncrements('id_forum'); // Primary key forums (sama dengan unsignedBigInteger auto increment)
             $table->unsignedBigInteger('id_course'); // FK ke courses.id
             $table->unsignedBigInteger('id_user');   // FK ke users.id
             $table->string('title', 150); // Judul diskusi
             $table->timestamp('created_at')->useCurrent(); // Tanggal buat
 
-            // Perbaikan foreign key
+            // Foreign key
             $table->foreign('id_course')->references('id')->on('courses')->onDelete('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
