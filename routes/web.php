@@ -8,7 +8,8 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/courses', [CourseController::class, 'index']);
+Route::get('/course', [CourseController::class, 'index']);
+Route::get('/add-course', [CourseController::class, 'create']);
 
 
 // Route::get('/dashboard', function () {
