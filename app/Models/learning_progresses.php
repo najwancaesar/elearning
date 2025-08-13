@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class LearningProgress extends Model
 {
-    protected $table = 'learning_progress';
+    // Sesuaikan dengan nama tabel di database
+    protected $table = 'learning_progresses';
 
     protected $fillable = [
         'id_user',
