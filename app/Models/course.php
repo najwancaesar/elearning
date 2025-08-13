@@ -10,7 +10,7 @@ class Course extends Model
     protected $table = 'courses';
 
     // Kolom yang bisa diisi mass assignment
-    protected $fillable = [
+    protected $fillable = [ 
         'title',
         'description',
         'duration',
@@ -20,7 +20,7 @@ class Course extends Model
         'access_level',
         'created_at'
     ];
-
+    // Relasi
     // Relasi: Course punya banyak CourseMaterial
     public function courseMaterials()
     {
